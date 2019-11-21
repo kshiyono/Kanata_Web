@@ -1,24 +1,39 @@
-# README
+# Kanata 個人の予実管理スキルを向上させるツール
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+これは、Shota KatsuyamaのRailsおよびVue.jsを勉強する目的に作成したアプリケーションです。
+また、SIerに属するにあたり、少しでも仕事がよりよく回ればという思いのもと、作成されました。
 
-Things you may want to cover:
+## ライセンス
 
-* Ruby version
+ソースコードはShota Katsuyama(@kshiyono)のライセンスのもとで公開されています。
+ライセンスとは何ぞや〜〜という思いしかないですが、一丁前にカッコだけはつけました。
 
-* System dependencies
+## 使い方
 
-* Configuration
+このアプリケーションを動かす場合は、まずはリポジトリを手元にクローンしてください。
+その後、次のコマンドで必要になる RubyGems をインストールします。
 
-* Database creation
+```
+$ bundle install --without production
+```
 
-* Database initialization
+その後、データベースへのマイグレーションを実行します。
 
-* How to run the test suite
+```
+$ rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+最後に、テストを実行してうまく動いているかどうか確認してください。
 
-* Deployment instructions
+```
+$ rails test
+```
 
-* ...
+テストが無事に通ったら、Railsサーバーを立ち上げる準備が整っているはずです。
+
+```
+$ rails server
+```
+
+詳しくは、GitHub(@kshiyono)あるいはQiita(@shiyo_no)あるいはTwitter(@k_shiyo_no)まで連絡ください。
+分かるもののみ回答します〜
