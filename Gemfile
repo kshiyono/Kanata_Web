@@ -27,6 +27,24 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'rails-controller-testing'
+  gem "minitest"
+  gem "minitest-rails"
+  gem "minitest-rails-capybara" # capybaraで結合テストできるようにする
+
+  # レポートの書式を変更する
+  gem "minitest-reporters" # テスト結果をゲージ表示
+  #gem "minitest-doc_reporter" # テスト結果を単体ごとに羅列
+
+  # 機能追加系
+  gem "minitest-stub_any_instance" # メソッドmockを追加できる様にする
+
+  #gem "minitest-bang" # let!文のサポートを追加
+
+  gem "factory_girl" # DBのデータのモックを作成
+  gem 'minitest-reporters'
+  gem 'guard'
+  gem 'guard-minitest'
 end
 
 group :production do
