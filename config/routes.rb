@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
+  root 'home#index'
   get 'home/index'
-  root 'static_pages#home'
-
 end
