@@ -3,7 +3,7 @@ require 'test_helper'
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @base_title = "Kanata TODO管理ツール"
+    @base_title = "Kanata ToDo管理ツール"
   end
 
   test "should get home" do
