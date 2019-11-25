@@ -7,6 +7,9 @@
             <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#">Users</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#">Help</a>
         </li>
         <li class="nav-item active">
