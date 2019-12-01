@@ -10,6 +10,11 @@ class Api::V1::UsersController < ApiController
     render json: @user
   end
 
+  def index
+    @users = User.all
+    render json: @users
+  end
+
   def new
   end
 
