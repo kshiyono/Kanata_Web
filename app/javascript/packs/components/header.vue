@@ -4,16 +4,18 @@
       <a class="title nav-link" href="#">Kanata</a>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Users</a>
+          <a class="nav-link">
+            <router-link to="/users">Users</router-link>
+          </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Help</a>
+          <a class="nav-link" href="#">Help</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-lsink" href="#">Login</a>
+          <a class="nav-lsink" href="#">Login</a>
         </li>
       </ul>
     </div>
