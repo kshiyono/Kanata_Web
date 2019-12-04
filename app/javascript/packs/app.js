@@ -4,10 +4,8 @@ import Header from './components/header.vue'
 import Footer from './components/footer.vue'
 
 var app = new Vue({
-    el: '#header-only',
     router: Router,
+    el: '#app',
     components: {
-    'navbar': Header,
-    'navfoo': Footer
-  }
+    'navbar': Header,  }
 });

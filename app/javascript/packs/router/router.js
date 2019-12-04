@@ -1,6 +1,8 @@
 import Vue from 'vue/dist/vue.esm.js'
 import VueRouter from 'vue-router'
-import Home from '../components/footer.vue'
+import Header from '../components/header.vue'
+import Footer from '../components/footer.vue'
+import Home from '../components/home.vue'
 import UsersListPage from '../components/users_list_page.vue'
 //import UserDetalePage from './components/user_detail_page.vue'
 Vue.use(VueRouter)

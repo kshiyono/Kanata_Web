@@ -10,6 +10,9 @@
   <body>
     <div id="app">
       <navbar></navbar>
+      <div class="container">
+        <router-view></router-view>
+      </div>
     </div>
     <div class="container">
       <%= yield %>
@@ -17,4 +20,4 @@
     <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
-<%= javascript_pack_tag 'home' %>
+<%= javascript_pack_tag 'app' %>

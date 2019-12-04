@@ -1,10 +1,14 @@
 <template>
   <header class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-      <a class="title nav-link" href="#">Kanata</a>
+      <a class="title nav-link" href="#">
+        <router-link to="/">Kanata</router-link>
+      </a>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link">
+            <router-link to="/">Home</router-link>
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link">
@@ -12,10 +16,14 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Help</a>
+          <a class="nav-link">
+            <router-link to="/help">Help</router-link>
+          </a>
         </li>
         <li class="nav-item active">
-          <a class="nav-lsink" href="#">Login</a>
+          <a class="nav-link">
+            <router-link to="/login">Login</router-link>
+          </a>
         </li>
       </ul>
     </div>
