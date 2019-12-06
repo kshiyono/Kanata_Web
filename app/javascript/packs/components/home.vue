@@ -5,6 +5,10 @@
     <h2>
       This is the home page for the Kanata
     </h2>
+
+    <router-link to="/signup">
+      <button class="btn btn-lg btn-primary">sigh up now!!</button>
+    </router-link>
   </div>
 </template>
 
