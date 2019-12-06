@@ -1,33 +1,32 @@
 <template>
-  <header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-      <a class="title nav-link" href="#">
-        <router-link to="/">Kanata</router-link>
-      </a>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-          <a class="nav-link">
+  <div>
+    <nav>
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo left">Kanata</a>
+        <ul class="right hide-on-med-and-down">
+          <li>
             <router-link to="/">Home</router-link>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
+          </li>
+          <li>
             <router-link to="/users">Users</router-link>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
+          </li>
+          <li>
             <router-link to="/help">Help</router-link>
-          </a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link">
+          </li>
+          <li>
             <router-link to="/login">Login</router-link>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </header>
+          </li>
+        </ul>
+        <ul class="right hide-on-large-only">
+          <li>
+            <a class="dropdown-button" href="#!" data-activates="dropdown">
+              Menu<i class="material-icons right">arrow_drop_down</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>

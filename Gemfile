@@ -12,6 +12,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap-sass'
 gem 'bcrypt'
+gem 'jquery-rails'
+gem 'materialize-sass'
+gem 'material_icons'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
