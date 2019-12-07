@@ -7,5 +7,7 @@ var app = new Vue({
     router: Router,
     el: '#app',
     components: {
-    'navbar': Header,  }
+    'navbar': Header,
+    'navfoo': Footer,
+  }
 });

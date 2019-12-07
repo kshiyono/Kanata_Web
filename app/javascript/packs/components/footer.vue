@@ -3,13 +3,6 @@
     <small>
       <a>Copyright &copy 2019 Kanata All Rights Reserved.</a>
     </small>
-    <nav>
-      <ul>
-        <li class="nav-item nav-link" href="#">Home</li>
-        <li class="nav-item nav-link" href="#">Help</li>
-        <li class="nav-item nav-link" href="#">Login</li>
-      </ul>
-    </nav>
   </footer>
 </template>
 
