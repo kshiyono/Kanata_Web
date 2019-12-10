@@ -1,34 +1,65 @@
 <template>
   <body>
+    <div v-if="errors.length != 0">
+      <ul v-for="e in errors" :key="e">
+        <li><font color="red">{{ e }}</font></li>
+      </ul>
+    </div>
     <h1>Sign up</h1>
     <div class="row">
       <a class="col s10 m11">
-        <input class="form-control" placeholder="Add your Name"
-         size="200" style="width:500px;">
-        <div class ="underline"></div>
-      </a>
-      <a class="col s10 m11">
-        <input class="form-control" placeholder="Email"
+        <input v-model="name" class="form-control" placeholder="Add your Name"
          size="200" style="width:500px;">
       </a>
       <a class="col s10 m11">
-        <input class="form-control" placeholder="Password"
-         size="200" style="width:500px;">
+        <input v-model="email" class="form-control" placeholder="Email"
+        type="email" size="200" style="width:500px;">
       </a>
       <a class="col s10 m11">
-        <input class="form-control" placeholder="Confirmation"
-         size="200" style="width:500px;">
+        <input v-model="password" class="form-control" placeholder="Password"
+        type="password" size="200" style="width:500px;">
+      </a>
+      <a class="col s10 m11">
+        <input v-model="password_confirmation" class="form-control" placeholder="Confirmation"
+        type="password" size="200" style="width:500px;">
       </a>
     </div>
-    <router-link to="/">
-      <div class="button_wrapper">
-        <button v-model="newUser" class="btn btn-lg btn-primary">Create my account</button>
-      </div>
-    </router-link>
+    <div class="button_wrapper">
+      <button v-on:click="createUser" class="btn btn-lg btn-primary">Create my account</button>
+    </div>
   </body>
 </template>
 
 <script>
+import axios from 'axios';
+import { csrfToken } from 'rails-ujs';
+
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken()
+
+export default {
+  data: () => ({
+      name:                  '',
+      email:                 '',
+      password:              '',
+      password_confirmation: '',
+      errors:                ''
+  }),
+  methods: {
+    createUser: function () {
+      axios
+      .post('/api/v1/users', { user: { name: this.name, email: this.email,
+        password: this.password, password_confirmation:this.password_confirmation}})
+      .then(response => {
+      })
+      .catch(error => {
+        console.error(error);
+        if (error.response.data && error.response.data.errors) {
+          this.errors = error.response.data.errors;
+        }
+      });
+    }
+  }
+}
 </script>
 
 <style scoped>
