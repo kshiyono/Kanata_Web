@@ -1,45 +1,68 @@
-<template>
-  <div>
-    <nav>
-      <div class="nav-wrapper container">
-        <a href="/" class="brand-logo left">Kanata</a>
-        <ul class="right hide-on-med-and-down">
-          <li>
-            <router-link to="/">Home</router-link>
-          </li>
-          <li>
-            <router-link to="/users">Users</router-link>
-          </li>
-          <li>
-            <router-link to="/help">Help</router-link>
-          </li>
-          <li>
-            <router-link to="/login">Login</router-link>
-          </li>
-        </ul>
-        <ul class="right hide-on-large-only">
-          <li>
-            <a class="dropdown-button" href="#!" data-activates="dropdown">
-              Menu<i class="material-icons right">arrow_drop_down</i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+<template>    
+  <v-app>
+    <v-app-bar
+      color="gray accent-4"
+      dark
+      app
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <router-link to="/" class="white--text">
+        <v-toolbar-title>かなた</v-toolbar-title>
+      </router-link>
+
+      <div class="flex-grow-1"></div>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-menu
+        left
+        bottom
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <router-link to="/">
+              <v-list-item-title>ホーム</v-list-item-title>
+            </router-link>
+          </v-list-item>
+          <v-list-item>
+            <router-link to="/group">
+              <v-list-item-title>グループ一覧</v-list-item-title>
+            </router-link>
+          </v-list-item>
+          <v-list-item>
+            <router-link to="/users">
+              <v-list-item-title>ユーザ一覧</v-list-item-title>
+            </router-link>
+          </v-list-item>
+          <v-list-item>
+            <router-link to="/help">
+              <v-list-item-title>問合せ</v-list-item-title>
+            </router-link>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-app-bar>
+  </v-app>
 </template>
 
 <script>
 </script>
 
-<style scoped>
-.title {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #fff;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
+<style>
+.header{
+  margin-bottom:0px;
 }
 </style>
