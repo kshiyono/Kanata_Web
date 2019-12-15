@@ -38,7 +38,7 @@
             @click=""
           >
             <v-list-item-title>
-              <router-link :to="menuItem.path">{{ menuItem.title }}</router-link>
+              <router-link :to="menuItem.path" class="blue-grey--text">{{ menuItem.title }}</router-link>
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -76,7 +76,7 @@
 </script>
 
 <style>
-.header{
-  margin-bottom:0px;
+a {
+  text-decoration: none;
 }
 </style>
