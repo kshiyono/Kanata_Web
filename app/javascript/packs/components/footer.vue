@@ -1,41 +1,12 @@
 <template>
-  <footer class="footer">
-    <small>
-      <a>Copyright &copy 2019 Kanata All Rights Reserved.</a>
-    </small>
-  </footer>
+  <v-footer>
+    <div class="flex-grow-1"></div>
+    <div>&copy; 2019 - {{ new Date().getFullYear() }} Kanata All Rights Reserved.</div>
+  </v-footer>
 </template>
 
 <script>
 </script>
 
 <style scoped>
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-}
-
-footer a {
-  color: #555;
-}
-
-footer a:hover {
-  color: #222;
-}
-
-footer small {
-  float: left;
-}
-
-footer ul {
-  float: right;
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  margin-left: 15px;
-}
 </style>
