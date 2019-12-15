@@ -2,15 +2,11 @@
 <html>
   <head>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <body>
-    <div id="app">
-      <navbar></navbar>
-      <div class="container">
-        <router-view></router-view>
-      </div>
-      <navfoo></navfoo>
-    </div>
     <%= javascript_pack_tag 'app' %>
-  </body>
+  </head>
+  <div id="app">
+    <navbar></navbar>
+    <router-view></router-view>
+    <navfoo></navfoo>
+  </div>
 </html>
