@@ -1,9 +1,8 @@
 <template>    
-  <v-app>
+  <div>
     <v-app-bar
-      color="gray accent-4"
+      color="deep-purple accent-4"
       dark
-      app
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -11,7 +10,7 @@
         <v-toolbar-title>かなた</v-toolbar-title>
       </router-link>
 
-      <div class="flex-grow-1"></div>
+      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>
@@ -44,7 +43,7 @@
         </v-list>
       </v-menu>
     </v-app-bar>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -77,6 +76,7 @@
 
 <style>
 a {
+  color: white;
   text-decoration: none;
   font-family: "游ゴシック","arial unicode ms",sans-serif;
 }
