@@ -32,25 +32,14 @@
         </template>
 
         <v-list>
-          <v-list-item>
-            <router-link to="/">
-              <v-list-item-title>ホーム</v-list-item-title>
-            </router-link>
-          </v-list-item>
-          <v-list-item>
-            <router-link to="/group">
-              <v-list-item-title>グループ一覧</v-list-item-title>
-            </router-link>
-          </v-list-item>
-          <v-list-item>
-            <router-link to="/users">
-              <v-list-item-title>ユーザ一覧</v-list-item-title>
-            </router-link>
-          </v-list-item>
-          <v-list-item>
-            <router-link to="/help">
-              <v-list-item-title>問合せ</v-list-item-title>
-            </router-link>
+          <v-list-item
+            v-for="(menuItem, index) in menuItems"
+            :key="index"
+            @click=""
+          >
+            <v-list-item-title>
+              <router-link :to="menuItem.path">{{ menuItem.title }}</router-link>
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -59,6 +48,31 @@
 </template>
 
 <script>
+  export default {
+    data: () => ({
+      menuItems: [
+        {
+          title: 'ホーム',
+          path: '/',
+        },
+        {
+          title: 'ユーザ一覧',
+          disabled: true,
+          path: '/users',
+        },
+        {
+          title: 'グループ一覧',
+          disabled: true,
+          path: '/group',
+        },
+        {
+          title: '問合せ',
+          disabled: true,
+          path: '/help',
+        },
+      ],
+    }),
+  }
 </script>
 
 <style>
