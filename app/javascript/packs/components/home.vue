@@ -58,7 +58,7 @@
                   </v-list-item-content>
                 </v-list-item>
 
-                <v-avatar color="#E0F2F1" size="250">
+                <v-avatar color="#E8F5E9" size="250">
                   <span class="blue-grey--text display-2">Team</span>
                 </v-avatar>
 
@@ -67,6 +67,48 @@
                 </v-card-text>
 
                 <v-card-text class="white--text">
+                  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                </v-card-text>
+
+                <v-chip
+                  class="ma-2"
+                  close
+                  color="teal"
+                  text-color="white"
+                  close-icon="mdi-delete"
+                >
+                  <v-avatar left>
+                    <v-icon>mdi-checkbox-marked-circle</v-icon>
+                  </v-avatar>
+                  Confirmed
+                </v-chip>
+
+              </v-card>
+            </v-flex>
+
+            <v-flex xs12 sm6 md4 text-center my-5>
+              <v-card
+                class="mx-auto"
+                color="#E8F5E9"
+                width="480"
+                outlined
+              >
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title class="blue-grey--text headline">XXXXXXXXXXXXXXXXXXXXX</v-list-item-title>
+                    <v-list-item-subtitle class="blue-grey--text">XXXXXXXXXXXXX</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+
+                <v-avatar color="#B2DFDB" size="250">
+                  <span class="blue-grey--text display-2">Individual</span>
+                </v-avatar>
+
+                <v-card-text>
+                  <v-divider></v-divider>
+                </v-card-text>
+
+                <v-card-text class="blue-grey--text">
                   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                 </v-card-text>
 
@@ -100,49 +142,7 @@
                   </v-list-item-content>
                 </v-list-item>
 
-                <v-avatar color="#E0F2F1" size="250">
-                  <span class="blue-grey--text display-2">Individual</span>
-                </v-avatar>
-
-                <v-card-text>
-                  <v-divider></v-divider>
-                </v-card-text>
-
-                <v-card-text class="white--text">
-                  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                </v-card-text>
-
-                <v-chip
-                  class="ma-2"
-                  close
-                  color="teal"
-                  text-color="white"
-                  close-icon="mdi-delete"
-                >
-                  <v-avatar left>
-                    <v-icon>mdi-checkbox-marked-circle</v-icon>
-                  </v-avatar>
-                  Confirmed
-                </v-chip>
-
-              </v-card>
-            </v-flex>
-
-            <v-flex xs12 sm6 md4 text-center my-5>
-              <v-card
-                class="mx-auto"
-                color="#4DB6AC"
-                width="480"
-                outlined
-              >
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="white--text headline">XXXXXXXXXXXXXXXXXXXXX</v-list-item-title>
-                    <v-list-item-subtitle class="white--text">XXXXXXXXXXXXX</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-avatar color="#E0F2F1" size="250">
+                <v-avatar color="#E8F5E9" size="250">
                   <span class="blue-grey--text display-2">Budget</span>
                 </v-avatar>
 
