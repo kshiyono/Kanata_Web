@@ -1,13 +1,13 @@
-<template>    
+<template>
   <div>
     <v-app-bar
-      color="deep-purple accent-4"
+      color="gray"
       dark
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <router-link to="/" class="white--text">
-        <v-toolbar-title>かなた</v-toolbar-title>
+        <v-toolbar-title>Kanata / your task manager</v-toolbar-title>
       </router-link>
 
       <v-spacer></v-spacer>
@@ -51,21 +51,21 @@
     data: () => ({
       menuItems: [
         {
-          title: 'ホーム',
+          title: 'Home',
           path: '/',
         },
         {
-          title: 'ユーザ一覧',
+          title: 'User',
           disabled: true,
           path: '/users',
         },
         {
-          title: 'グループ一覧',
+          title: 'Group',
           disabled: true,
           path: '/group',
         },
         {
-          title: '問合せ',
+          title: 'Help',
           disabled: true,
           path: '/help',
         },
