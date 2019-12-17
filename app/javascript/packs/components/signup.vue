@@ -20,6 +20,7 @@
 
     <br>
     <br>
+
     <form>
       <v-layout wrap justify-center>
         <v-col cols="5" sm="5" md="5">
@@ -41,9 +42,10 @@
                 width="500"
                 outlined
               >
+                <br>
                 <v-list-item>
                   <v-list-item-content>
-                    <v-list-item-title class="blue-grey--text headline">Your Personal Infomation</v-list-item-title>
+                    <v-list-item-title class="blue-grey--text headline">SignUp</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-layout wrap justify-center>
