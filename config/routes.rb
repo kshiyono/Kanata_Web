@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get  '/signup',  to: 'home#index'
   get  '/users',  to: 'home#index'#zantei
   get  '/users/1',  to: 'home#index'#zantei
+  get  'sessions/new'
   namespace :api, {format: 'json'} do
     namespace :v1 do
       resources :users, only: [:index, :show, :create]
