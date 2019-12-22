@@ -94,7 +94,7 @@
 
       <v-layout wrap justify-center>
         <v-flex xs12 sm12 md12 text-center my-5>
-          <v-btn v-on:click="createUser" x-large depressed rounded class="ma-2" outlined color="teal">
+          <v-btn v-on:click="loginUser" x-large depressed rounded class="ma-2" outlined color="teal">
             Login
           </v-btn>
         </v-flex>
@@ -106,12 +106,32 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { csrfToken } from 'rails-ujs';
+
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken()
+
 export default {
   data: () => ({
       email:                 '',
       password:              '',
       errors:                ''
-  })
+  }),
+  methods: {
+    loginUser: function () {
+      axios
+      .post('/login', { user: { email: this.email, password: this.password }})
+      .then(response => {
+          this.$router.replace('/');
+      })
+      .catch(error => {
+        console.error(error);
+        if (error.response.data && error.response.data.errors) {
+          this.errors = error.response.data.errors;
+        }
+      });
+    }
+  }
 }
 </script>
 
