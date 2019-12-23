@@ -6,7 +6,7 @@ import Home from '../components/home.vue'
 import SignUp from '../components/signup.vue'
 import LogIn from '../components/login.vue'
 import UsersListPage from '../components/users_list_page.vue'
-//import UserDetalePage from './components/user_detail_page.vue'
+import UserDetalePage from '../components/user_detail_page.vue'
 Vue.use(VueRouter)
 
 export default new VueRouter ({
@@ -24,8 +24,8 @@ export default new VueRouter ({
     { path: '/login',
       name: 'LogIn',
       component: LogIn  },
-//    { path: '/users/:id(\\d+)',
-//      name: 'UserDetalePage',
-//      component: UserDetalePage }
+   { path: '/users/:id(\\d+)',
+     name: 'UserDetalePage',
+     component: UserDetalePage }
   ]
 })
