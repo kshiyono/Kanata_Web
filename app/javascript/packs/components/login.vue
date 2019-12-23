@@ -123,8 +123,8 @@ export default {
       .post('/api/v1/login', { user: { email: this.email, password: this.password }})
       .then(response => {
 
-          //TODO:ログイン処理レンダリング先はログイン状態(一旦ホーム)
-          //this.$router.replace('/');
+          let user = response.data;
+          this.$router.push({ name: 'UserDetalePage', params: { id: user.id } });
       })
       .catch(error => {
         console.error(error);

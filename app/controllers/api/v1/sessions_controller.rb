@@ -7,6 +7,7 @@ class Api::V1::SessionsController < ApiController
     user = User.find_by(email: sessions_params[:email].downcase)
     if user && user.authenticate(sessions_params[:password])
       log_in user
+      render json: user
     end
   end
 
