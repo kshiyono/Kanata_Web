@@ -18,89 +18,89 @@
         </ul>
       </div>
 
-    <br>
-    <br>
+      <br>
+      <br>
 
-    <form>
-      <v-layout wrap justify-center>
-        <v-col cols="5" sm="5" md="5">
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
-            <div class="display-3 teal--text">Kanata</div>
-          </v-row>
-        </v-col>
-      </v-layout>
-        <v-container fluid>
-          <v-layout wrap justify-center>
-            <v-flex xs12 sm6 md6 text-center my-5>
-              <v-card
-                class="mx-auto"
-                color="#E8F5E9"
-                width="500"
-                outlined
-              >
-                <br>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="blue-grey--text headline">Login</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-layout wrap justify-center>
+      <form>
+        <v-layout wrap justify-center>
+          <v-col cols="5" sm="5" md="5">
+            <v-row
+              class="fill-height"
+              align="center"
+              justify="center"
+            >
+              <div class="display-3 teal--text">Kanata</div>
+            </v-row>
+          </v-col>
+        </v-layout>
+          <v-container fluid>
+            <v-layout wrap justify-center>
+              <v-flex xs12 sm6 md6 text-center my-5>
+                <v-card
+                  class="mx-auto"
+                  color="#E8F5E9"
+                  width="500"
+                  outlined
+                >
+                  <br>
+                  <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title class="blue-grey--text headline">Login</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-layout wrap justify-center>
 
-                  <v-col cols="10" sm="10" md="10">
-                    <v-text-field
-                      v-model="email"
-                      label="Add your Email"
-                      outlined
-                      color="teal"
-                      type="email"
-                    ></v-text-field>
-                  </v-col>
+                    <v-col cols="10" sm="10" md="10">
+                      <v-text-field
+                        v-model="email"
+                        label="Add your Email"
+                        outlined
+                        color="teal"
+                        type="email"
+                      ></v-text-field>
+                    </v-col>
 
-                  <v-col cols="10" sm="10" md="10">
-                    <v-text-field
-                      v-model="password"
-                      label="Password"
-                      outlined
-                      color="teal"
-                      type="password"
-                    ></v-text-field>
-                  </v-col>
-                </v-layout>
+                    <v-col cols="10" sm="10" md="10">
+                      <v-text-field
+                        v-model="password"
+                        label="Password"
+                        outlined
+                        color="teal"
+                        type="password"
+                      ></v-text-field>
+                    </v-col>
+                  </v-layout>
 
-                <v-divider ></v-divider>
+                  <v-divider ></v-divider>
 
-                <br>
-                <router-link to="/signup" class="blue-grey--text">
-                  <div>
-                    New user? Create your account!
-                    <v-icon>mdi-account</v-icon>
-                  </div>
-                </router-link>
-                <br>
+                  <br>
+                  <router-link to="/signup" class="blue-grey--text">
+                    <div>
+                      New user? Create your account!
+                      <v-icon>mdi-account</v-icon>
+                    </div>
+                  </router-link>
+                  <br>
 
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container>
 
-      </v-layout wrap justify-center>
-    </form>
+        </v-layout wrap justify-center>
+      </form>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-layout wrap justify-center>
-        <v-flex xs12 sm12 md12 text-center my-5>
-          <v-btn v-on:click="loginUser" x-large depressed rounded class="ma-2" outlined color="teal">
-            Login
-          </v-btn>
-        </v-flex>
-      </v-layout>
+        <v-layout wrap justify-center>
+          <v-flex xs12 sm12 md12 text-center my-5>
+            <v-btn v-on:click="loginUser" x-large depressed rounded class="ma-2" outlined color="teal">
+              Login
+            </v-btn>
+          </v-flex>
+        </v-layout>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
     </v-app>
   </body>
 </template>
@@ -120,9 +120,11 @@ export default {
   methods: {
     loginUser: function () {
       axios
-      .post('/login', { user: { email: this.email, password: this.password }})
+      .post('/api/v1/login', { user: { email: this.email, password: this.password }})
       .then(response => {
-          this.$router.replace('/');
+
+          //TODO:ログイン処理レンダリング先はログイン状態(一旦ホーム)
+          //this.$router.replace('/');
       })
       .catch(error => {
         console.error(error);
