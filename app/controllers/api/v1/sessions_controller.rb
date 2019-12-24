@@ -7,7 +7,10 @@ class Api::V1::SessionsController < ApiController
     user = User.find_by(email: sessions_params[:email].downcase)
     if user && user.authenticate(sessions_params[:password])
       log_in user
-      render json: user
+      render json: user, notice: 'メッセージが送信されました'
+    else
+      #TODO:ログイン失敗時のメッセージレンダリング
+      not_authorized
     end
   end
 
@@ -30,5 +33,10 @@ class Api::V1::SessionsController < ApiController
         if session[:user_id]
           @current_user ||= User.find_by(id: session[:user_id])
         end
+    end
+
+    # 認証エラー
+    def not_authorized
+      render json: { errors: ['Not Authorized'] }, status: :unauthorized
     end
 end
