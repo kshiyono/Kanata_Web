@@ -7,14 +7,15 @@ class Api::V1::SessionsController < ApiController
     user = User.find_by(email: sessions_params[:email].downcase)
     if user && user.authenticate(sessions_params[:password])
       log_in user
-      render json: user, notice: 'メッセージが送信されました'
+      render json: user
     else
-      #TODO:ログイン失敗時のメッセージレンダリング
       not_authorized
     end
   end
 
   def destroy
+    log_out
+    redirect_to root_url
   end
 
   private
@@ -23,20 +24,28 @@ class Api::V1::SessionsController < ApiController
       params.fetch(:user, {}).permit(:email, :password)
     end
 
-    # 渡されたユーザーでログインする
     def log_in(user)
       session[:user_id] = user.id
     end
 
-    # 現在ログイン中のユーザーを返す (いる場合)
+    def log_out
+      session.delete(:user_id)
+      @current_user = nil
+    end
+
+    # ログインユーザを保持
     def current_user
         if session[:user_id]
           @current_user ||= User.find_by(id: session[:user_id])
         end
     end
 
-    # 認証エラー
+    # ログインしている場合はtrue
+    def logged_in?
+      !current_user.nil?
+    end
+
     def not_authorized
-      render json: { errors: ['Not Authorized'] }, status: :unauthorized
+      render json: { errors: ['Cannot find email/password combination'] }, status: :unauthorized
     end
 end
