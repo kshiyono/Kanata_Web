@@ -7,6 +7,7 @@ class Api::V1::SessionsController < ApiController
     user = User.find_by(email: sessions_params[:email].downcase)
     if user && user.authenticate(sessions_params[:password])
       log_in user
+      remember user
       render json: user
     else
       not_authorized
@@ -31,6 +32,11 @@ class Api::V1::SessionsController < ApiController
     def log_out
       session.delete(:user_id)
       @current_user = nil
+    end
+
+    # ユーザーのセッションを永続化
+    def remember(user)
+      user.remember
     end
 
     # ログインユーザを保持
