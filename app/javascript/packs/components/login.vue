@@ -94,7 +94,7 @@
 
         <v-layout wrap justify-center>
           <v-flex xs12 sm12 md12 text-center my-5>
-            <v-btn v-on:click="loginUser" x-large depressed rounded class="ma-2" outlined color="teal">
+            <v-btn v-on:click="login" x-large depressed rounded class="ma-2" outlined color="teal">
               Login
             </v-btn>
           </v-flex>
@@ -110,20 +110,26 @@ import axios from 'axios';
 import { csrfToken } from 'rails-ujs';
 
 axios.defaults.headers.common['X-CSRF-Token'] = csrfToken()
+const crypto = require('crypto')
+crypto.getHashes()
 
 export default {
   data: () => ({
-      email:                 '',
-      password:              '',
-      errors:                ''
+      email:     '',
+      password:  '',
+      errors:    ''
   }),
   methods: {
-    loginUser: function () {
+    login: function () {
       axios
       .post('/api/v1/login', { user: { email: this.email, password: this.password }})
       .then(response => {
 
           let user = response.data;
+          localStorage.setItem('loginUser', JSON.stringify({
+             id_digest: user.id_digest,
+             remember_digest: user.remember_digest
+          }))
           this.$router.push({ name: 'UserDetalePage', params: { id: user.id } });
       })
       .catch(error => {
