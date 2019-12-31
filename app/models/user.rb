@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
+  after_save :create_id_digest
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name,      presence: true, length: { maximum: 50 }
   validates :email,     presence: true, length: { maximum: 255 },
@@ -32,5 +33,13 @@ class User < ApplicationRecord
   # 渡されたトークンがダイジェストと一致したらtrueを返す
   def authenticated?(remember_token)
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+
+  # after_saveによって呼び出されるメソッド
+  def create_id_digest
+    if id_digest.nil?
+      new_digest = Digest::SHA256.hexdigest(id.to_s)
+      update_column(:id_digest, new_digest)
+    end
   end
 end
