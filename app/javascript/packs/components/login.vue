@@ -69,6 +69,11 @@
                         type="password"
                       ></v-text-field>
                     </v-col>
+
+                    <v-col cols="10" sm="10" md="10">
+                      <v-switch v-model="saveLogin" :label="`Remember me on this computer`"></v-switch>
+                    </v-col>
+
                   </v-layout>
 
                   <v-divider ></v-divider>
@@ -117,6 +122,7 @@ export default {
   data: () => ({
       email:     '',
       password:  '',
+      saveLogin: false,
       errors:    ''
   }),
   methods: {
@@ -126,10 +132,13 @@ export default {
       .then(response => {
 
           let user = response.data;
-          localStorage.setItem('loginUser', JSON.stringify({
-             id_digest: user.id_digest,
-             remember_digest: user.remember_digest
-          }))
+
+          if (this.saveLogin) {
+            localStorage.setItem('loginUser', JSON.stringify({
+              id_digest: user.id_digest,
+              remember_digest: user.remember_digest
+            }))
+          }
           this.$router.push({ name: 'UserDetalePage', params: { id: user.id } });
       })
       .catch(error => {
