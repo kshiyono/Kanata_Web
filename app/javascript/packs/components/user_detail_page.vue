@@ -30,7 +30,7 @@
                   <v-list-item-subtitle>Logged In</v-list-item-subtitle>
                 </v-list-item-content>
                 <router-link to="/users/:user.id/edit">
-                  <v-btn v-on:click="loginUser" depressed rounded class="ma-2" outlined color="teal">
+                  <v-btn depressed rounded class="ma-2" outlined color="teal">
                     Edit Profile
                   </v-btn>
                 </router-link>
