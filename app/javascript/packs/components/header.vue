@@ -84,6 +84,16 @@
         },
       ],
     }),
+
+    // TODO:リロード時(どこで定義？)、localStorageと認証し、sessionStorageを作成。
+
+
+    // TODO:sessionStorageが存在する場合は、ヘッダーのボタンをLogoutに変更。
+
+
+    // TODO:Logout処理は、local/sessionStorageをactionからmutation経由で削除。
+    // DBトークンも削除するよう、リクエストを発行。
+
   }
 </script>
 
@@ -93,5 +103,4 @@ a {
   text-decoration: none;
   font-family: "游ゴシック","arial unicode ms",sans-serif;
 }
-
 </style>

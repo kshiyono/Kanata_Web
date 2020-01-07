@@ -133,12 +133,17 @@ export default {
 
           let user = response.data;
 
+          // TODO:Vuexのactionからmutationを呼び出し、localStorageに格納
           if (this.saveLogin) {
             localStorage.setItem('loginUser', JSON.stringify({
               id_digest: user.id_digest,
               remember_digest: user.remember_digest
             }))
           }
+
+          // TODO:Vuexのactionからmutationを呼び出し、sessionStorageに格納
+
+
           this.$router.push({ name: 'UserDetalePage', params: { id: user.id } });
       })
       .catch(error => {
