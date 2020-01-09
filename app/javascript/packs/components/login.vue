@@ -131,15 +131,14 @@ export default {
       .post('/api/v1/login', { user: { email: this.email, password: this.password }})
       .then(response => {
 
-          let user = response.data;
+          let loginUser = response.data;
 
-          // TODO:Vuexのactionからmutationを呼び出し、localStorageに格納
-          if (this.saveLogin) {
-            localStorage.setItem('loginUser', JSON.stringify({
-              id_digest: user.id_digest,
-              remember_digest: user.remember_digest
-            }))
-          }
+          // ユーザがログイン情報を保持する場合、VuexのActionでログインユーザ情報をlocalStorageに格納
+          if (this.saveLogin)
+            this.$store.dispatch('saveLoginToLocalStorage', loginUser)
+              .then(() => {
+                this.$store.dispatch('saveLoginToSessionStorage', loginUser)
+              })
 
           // TODO:Vuexのactionからmutationを呼び出し、sessionStorageに格納
 
