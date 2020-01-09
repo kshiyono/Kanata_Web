@@ -140,10 +140,11 @@ export default {
                 this.$store.dispatch('saveLoginToSessionStorage', loginUser)
               })
 
-          // TODO:Vuexのactionからmutationを呼び出し、sessionStorageに格納
+          // ユーザがログイン情報を保持しない場合、sessionStorageにのみ格納
+          else
+            this.$store.dispatch('saveLoginToSessionStorage', loginUser)
 
-
-          this.$router.push({ name: 'UserDetalePage', params: { id: user.id } });
+          this.$router.push({ name: 'UserDetalePage', params: { id: loginUser.id } });
       })
       .catch(error => {
         console.error(error);
