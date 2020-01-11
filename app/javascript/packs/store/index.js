@@ -8,8 +8,8 @@ Vue.use(Vuex)
 
 const state = {
   loginUser: {
-    id_digest: localStorage.getItem('saveLoginUser').id_digest,
-    remember_digest: localStorage.getItem('saveLoginUser').remember_digest,
+    id_digest: null, //localStorage.getItem('saveLoginUser').id_digest,
+    remember_digest: null, //localStorage.getItem('saveLoginUser').remember_digest,
     userId: null
   }
 }

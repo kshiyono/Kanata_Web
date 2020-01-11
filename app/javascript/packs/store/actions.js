@@ -17,10 +17,6 @@ export default {
         }))
 
         // VuexのStoreにログイン情報を保存
-        commit('loginUser', JSON.stringify({
-            id_digest: loginUser.id_digest,
-            remember_digest: loginUser.remember_digest,
-            userId: loginUser.id
-        }))
+        commit('loginUser', loginUser)
     }
 }
