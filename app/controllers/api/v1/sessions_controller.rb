@@ -4,9 +4,8 @@ class Api::V1::SessionsController < ApiController
   end
 
   def create
-    user = User.find_by(email: sessions_params[:email].downcase)
-    if user && user.authenticate(sessions_params[:password])
-      log_in user
+    user = User.find_by(email: sessions_login_params[:email].downcase)
+    if user && user.authenticate(sessions_login_params[:password])
       remember user
       render json: user
     else
@@ -15,28 +14,28 @@ class Api::V1::SessionsController < ApiController
   end
 
   def destroy
-    log_out
-    redirect_to root_url
+    user = User.find_by(id_digest: sessions_logout_params[:id_digest])
+    forget user
   end
 
   private
 
-    def sessions_params
+    def sessions_login_params
       params.fetch(:user, {}).permit(:email, :password)
     end
 
-    def log_in(user)
-      session[:user_id] = user.id
-    end
-
-    def log_out
-      session.delete(:user_id)
-      @current_user = nil
+    def sessions_logout_params
+      params.fetch(:user, {}).permit(:id_digest, :remember_digest)
     end
 
     # ユーザーのセッションを永続化
     def remember(user)
       user.remember
+    end
+
+    # ユーザーのセッションを永続化を解除
+    def forget(user)
+      user.forget
     end
 
     # ログインユーザを保持
