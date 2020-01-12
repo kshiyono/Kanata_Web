@@ -30,8 +30,8 @@
         </v-btn>
       </router-link>
 
-      <router-link to="/logout" v-if="$store.state.isLoggedIn">
-        <v-btn x-large depressed rounded class="ma-2" outlined color="teal">
+      <router-link to="/" v-if="$store.state.isLoggedIn">
+        <v-btn v-on:click="logout" x-large depressed rounded class="ma-2" outlined color="teal">
           Logout
           <v-icon>mdi-account</v-icon>
         </v-btn>
@@ -67,48 +67,85 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      menuItems: [
-        {
-          title: 'Home',
-          path: '/',
-        },
-        {
-          title: 'User',
-          disabled: true,
-          path: '/users',
-        },
-        {
-          title: 'Group',
-          disabled: true,
-          path: '/group',
-        },
-        {
-          title: 'Help',
-          disabled: true,
-          path: '/help',
-        },
-      ],
+import axios from 'axios';
+import { csrfToken } from 'rails-ujs';
 
-    }),
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken()
+const crypto = require('crypto')
+crypto.getHashes()
+
+export default {
+  data: () => ({
+    menuItems: [
+      {
+        title: 'Home',
+        path: '/',
+      },
+      {
+        title: 'User',
+        disabled: true,
+        path: '/users',
+      },
+      {
+        title: 'Group',
+        disabled: true,
+        path: '/group',
+      },
+      {
+        title: 'Help',
+        disabled: true,
+        path: '/help',
+      },
+    ],
+
+  }),
 
   computed: {
     getLoginUser: function(){
       return this.$store.state.loginUser
     }
-  }
+  },
 
+  methods: {
+    logout: function () {
+      axios
+      .delete('/api/v1/logout', { data: { user: {
+        id_digest: this.$store.state.loginUser.id_digest,
+        remember_digest: this.$store.state.loginUser.remember_digest
+        }}
+      })
+      .then(response => {
+
+        // ログアウト時には、Webストレージの中身を空にする
+
+
+        // ログアウト時には、Storeのログインユーザを空にする
+
+
+
+      })
+      .catch(error => {
+        console.error(error);
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.statusText);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
+    }
     // TODO:リロード時(どこで定義？)、localStorageと認証し、sessionStorageを作成。
-
-
-    // TODO:sessionStorageが存在する場合は、ヘッダーのボタンをLogoutに変更。
 
 
     // TODO:Logout処理は、local/sessionStorageをactionからmutation経由で削除。
     // DBトークンも削除するよう、リクエストを発行。
-
   }
+}
 </script>
 
 <style>
