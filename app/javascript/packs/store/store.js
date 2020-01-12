@@ -7,10 +7,15 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  auth: {
-    userId: null,
-    token: localStorage.getItem('token')
-  }
+  // ログインユーザ
+  loginUser: {
+    id_digest: null,
+    remember_digest: null,
+    userId: null
+  },
+
+  // ログインしている場合true
+  isLoggedIn: false
 }
 
 export default new Vuex.Store({

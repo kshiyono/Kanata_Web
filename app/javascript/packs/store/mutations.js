@@ -5,5 +5,7 @@ export default {
         remember_digest: payload.remember_digest,
         userId: payload.id
       }
+
+      state.isLoggedIn = true
     }
 }

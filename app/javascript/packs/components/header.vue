@@ -23,9 +23,16 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <router-link to="/login">
+      <router-link to="/login" v-if="!$store.state.isLoggedIn">
         <v-btn x-large depressed rounded class="ma-2" outlined color="teal">
           Login
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </router-link>
+
+      <router-link to="/logout" v-if="$store.state.isLoggedIn">
+        <v-btn x-large depressed rounded class="ma-2" outlined color="teal">
+          Logout
           <v-icon>mdi-account</v-icon>
         </v-btn>
       </router-link>
@@ -83,7 +90,14 @@
           path: '/help',
         },
       ],
+
     }),
+
+  computed: {
+    getLoginUser: function(){
+      return this.$store.state.loginUser
+    }
+  }
 
     // TODO:リロード時(どこで定義？)、localStorageと認証し、sessionStorageを作成。
 
