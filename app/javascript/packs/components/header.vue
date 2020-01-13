@@ -100,12 +100,6 @@ export default {
 
   }),
 
-  computed: {
-    getLoginUser: function(){
-      return this.$store.state.loginUser
-    }
-  },
-
   methods: {
     // Logout処理は、local/sessionStorageをactionからmutation経由で削除。
     // DBトークンも削除するよう、リクエストを発行。
