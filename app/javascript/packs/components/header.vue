@@ -107,6 +107,8 @@ export default {
   },
 
   methods: {
+    // Logout処理は、local/sessionStorageをactionからmutation経由で削除。
+    // DBトークンも削除するよう、リクエストを発行。
     logout: function () {
       axios
       .delete('/api/v1/logout', { data: { user: {
@@ -116,13 +118,12 @@ export default {
       })
       .then(response => {
 
-        // ログアウト時には、Webストレージの中身を空にする
-
+        // ログアウト時には、Webストレージの中身を削除
+        this.$store.dispatch('deleteLoginFromLocalStorage')
+        this.$store.dispatch('deleteLoginFromSessionStorage')
 
         // ログアウト時には、Storeのログインユーザを空にする
-
-
-
+        this.$store.dispatch('deleteLoginFromStore')
       })
       .catch(error => {
         console.error(error);
@@ -140,10 +141,6 @@ export default {
       });
     }
     // TODO:リロード時(どこで定義？)、localStorageと認証し、sessionStorageを作成。
-
-
-    // TODO:Logout処理は、local/sessionStorageをactionからmutation経由で削除。
-    // DBトークンも削除するよう、リクエストを発行。
   }
 }
 </script>

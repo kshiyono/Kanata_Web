@@ -136,13 +136,10 @@ export default {
           // ユーザがログイン情報を保持する場合、VuexのActionでログインユーザ情報をlocalStorageに格納
           if (this.saveLogin)
             this.$store.dispatch('saveLoginToLocalStorage', loginUser)
-              .then(() => {
-                this.$store.dispatch('saveLoginToSessionStorage', loginUser)
-              })
 
-          // ユーザがログイン情報を保持しない場合、sessionStorageにのみ格納
-          else
-            this.$store.dispatch('saveLoginToSessionStorage', loginUser)
+          // sessionStorageとStoreにログインユーザ情報を格納
+          this.$store.dispatch('saveLoginToSessionStorage', loginUser)
+          this.$store.dispatch('saveLoginToStore', loginUser)
 
           this.$router.push({ name: 'UserDetalePage', params: { id: loginUser.id } });
       })

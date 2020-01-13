@@ -2,7 +2,7 @@ export default {
     saveLoginToLocalStorage ({ commit }, loginUser) {
 
         // ローカルストレージにログイン情報を保存
-        localStorage.setItem('saveLoginUser_Kanata', JSON.stringify({
+        localStorage.setItem('LoginUser_Kanata', JSON.stringify({
             id_digest: loginUser.id_digest,
             remember_digest: loginUser.remember_digest
         }))
@@ -11,12 +11,33 @@ export default {
     saveLoginToSessionStorage ({ commit }, loginUser) {
 
         // セッションストレージにログイン情報を保存
-        sessionStorage.setItem('saveLoginUser_Kanata', JSON.stringify({
+        sessionStorage.setItem('LoginUser_Kanata', JSON.stringify({
             id_digest: loginUser.id_digest,
             remember_digest: loginUser.remember_digest
         }))
+    },
+
+    saveLoginToStore ({ commit }, loginUser) {
 
         // VuexのStoreにログイン情報を保存
-        commit('loginUser', loginUser)
-    }
+        commit('login', loginUser)
+    },
+
+    deleteLoginFromLocalStorage ({ commit }) {
+
+        // ローカルストレージのログイン情報を削除
+        localStorage.removeItem('LoginUser_Kanata')
+    },
+
+    deleteLoginFromSessionStorage ({ commit }) {
+
+        // セッションストレージのログイン情報を削除
+        sessionStorage.removeItem('LoginUser_Kanata')
+    },
+
+    deleteLoginFromStore ({ commit }) {
+
+        // VuexのStoreのログイン情報を削除
+        commit('logout')
+    },
 }
