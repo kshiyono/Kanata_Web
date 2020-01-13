@@ -13,6 +13,17 @@ class Api::V1::SessionsController < ApiController
     end
   end
 
+  def confirm
+    if user = User.find_by(
+      id_digest: sessions_confirm_params[:id_digest],
+      remember_digest: sessions_confirm_params[:remember_digest]
+    )
+      render json: user
+    else
+      not_authorized
+    end
+  end
+
   def destroy
     user = User.find_by(id_digest: sessions_logout_params[:id_digest])
     forget user
@@ -22,6 +33,10 @@ class Api::V1::SessionsController < ApiController
 
     def sessions_login_params
       params.fetch(:user, {}).permit(:email, :password)
+    end
+
+    def sessions_confirm_params
+      params.fetch(:user, {}).permit(:id_digest, :remember_digest)
     end
 
     def sessions_logout_params
