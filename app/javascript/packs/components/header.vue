@@ -100,24 +100,38 @@ export default {
 
   }),
 
+  // リロード時のログイン判定
+  // Localstorage -> サーバリクエスト後、SessionStorage/Store登録
+  // SessionStorage -> サーバリクエスト後、Store登録
+  created () {
+
+    // SessionStorageにログインユーザが存在する場合、リクエスト〜Store登録〜リターン
+    if (sessionStorage.getItem('LoginUser_Kanata')) {
+      this.loginFromSessionStorage()
+      return
+    }
+
+    // LocalStorageにログインユーザが存在する場合、リクエスト〜SessionStorage/Store登録〜リターン
+    if (localStorage.getItem('LoginUser_Kanata')) {
+      this.loginFromLocalStorage()
+      return
+    }
+  },
+
   methods: {
-    // Logout処理は、local/sessionStorageをactionからmutation経由で削除。
+
+    // Logout処理 ->
+    // local/sessionStorageをactionからmutation経由で削除。
     // DBトークンも削除するよう、リクエストを発行。
     logout: function () {
       axios
       .delete('/api/v1/logout', { data: { user: {
-        id_digest: this.$store.state.loginUser.id_digest,
-        remember_digest: this.$store.state.loginUser.remember_digest
+          id_digest: this.$store.state.loginUser.id_digest,
+          remember_digest: this.$store.state.loginUser.remember_digest
         }}
       })
       .then(response => {
-
-        // ログアウト時には、Webストレージの中身を削除
-        this.$store.dispatch('deleteLoginFromLocalStorage')
-        this.$store.dispatch('deleteLoginFromSessionStorage')
-
-        // ログアウト時には、Storeのログインユーザを空にする
-        this.$store.dispatch('deleteLoginFromStore')
+        this.deleteWebStorage()
       })
       .catch(error => {
         console.error(error);
@@ -133,8 +147,66 @@ export default {
         }
         console.log(error.config);
       });
-    }
-    // TODO:リロード時(どこで定義？)、localStorageと認証し、sessionStorageを作成。
+    },
+
+    // WebストレージとStoreのログイン情報を削除。
+    deleteWebStorage: function () {
+        // ログアウト時には、Webストレージの中身を削除
+        this.$store.dispatch('deleteLoginFromLocalStorage')
+        this.$store.dispatch('deleteLoginFromSessionStorage')
+
+        // ログアウト時には、Storeのログインユーザを空にする
+        this.$store.dispatch('deleteLoginFromStore')
+    },
+
+    // ローカルストレージを利用したログイン自動認証
+    loginFromLocalStorage: function () {
+
+      axios
+      .post('/api/v1/auth', { user:
+          JSON.parse(localStorage.getItem('LoginUser_Kanata'))
+      })
+      .then(response => {
+
+          let loginUser = response.data;
+
+          // sessionStorageとStoreにログインユーザ情報を格納
+          this.$store.dispatch('saveLoginToSessionStorage', loginUser)
+          this.$store.dispatch('saveLoginToStore', loginUser)
+
+          this.$router.push({ name: 'UserDetalePage', params: { id: loginUser.id } });
+      })
+      .catch(error => {
+        console.error(error);
+        if (error.response.status == 401){
+          this.errors = error.response.data.errors;
+        }
+      })
+    },
+
+    // セッションストレージを利用したログイン自動認証
+    loginFromSessionStorage: function () {
+
+      axios
+      .post('/api/v1/auth', { user:
+          JSON.parse(sessionStorage.getItem('LoginUser_Kanata'))
+      })
+      .then(response => {
+
+          let loginUser = response.data;
+
+          // Storeにログインユーザ情報を格納
+          this.$store.dispatch('saveLoginToStore', loginUser)
+
+          this.$router.push({ name: 'UserDetalePage', params: { id: loginUser.id } });
+      })
+      .catch(error => {
+        console.error(error);
+        if (error.response.status == 401){
+          this.errors = error.response.data.errors;
+        }
+      })
+    },
   }
 }
 </script>

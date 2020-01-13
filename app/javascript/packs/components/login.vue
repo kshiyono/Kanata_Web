@@ -120,9 +120,9 @@ crypto.getHashes()
 
 export default {
   data: () => ({
-      email:     '',
-      password:  '',
-      saveLogin: false,
+      email:     'test@test.com',
+      password:  'testtest',
+      saveLogin: true,
       errors:    ''
   }),
   methods: {
