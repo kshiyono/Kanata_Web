@@ -173,8 +173,6 @@ export default {
           // sessionStorageとStoreにログインユーザ情報を格納
           this.$store.dispatch('saveLoginToSessionStorage', loginUser)
           this.$store.dispatch('saveLoginToStore', loginUser)
-
-          this.$router.push({ name: 'UserDetalePage', params: { id: loginUser.id } });
       })
       .catch(error => {
         console.error(error);
@@ -197,8 +195,6 @@ export default {
 
           // Storeにログインユーザ情報を格納
           this.$store.dispatch('saveLoginToStore', loginUser)
-
-          this.$router.push({ name: 'UserDetalePage', params: { id: loginUser.id } });
       })
       .catch(error => {
         console.error(error);

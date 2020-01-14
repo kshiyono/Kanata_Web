@@ -14,8 +14,10 @@ const state = {
     userId: null
   },
 
-  // ログインしている場合true
-  isLoggedIn: false
+  // ログイン時 -> true / 未ログイン時 -> false
+  // routerで非認証時はログイン画面に遷移させるために、デフォルトは Null とする。
+  // vueインスタンス生成時に、ログイン時 -> true / 未ログイン時 -> false を明示的に更新。
+  isLoggedIn: null
 }
 
 export default new Vuex.Store({
