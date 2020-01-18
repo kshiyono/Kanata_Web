@@ -40,4 +40,10 @@ export default {
         // VuexのStoreのログイン情報を削除
         commit('logout')
     },
+
+    notLogin ({ commit }) {
+
+        // VuexのStoreのログイン情報を削除
+        commit('notlogin')
+    },
 }

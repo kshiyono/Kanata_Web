@@ -18,4 +18,10 @@ export default {
 
       state.isLoggedIn = false
     },
+
+    // ログインしていない場合、明示的に state.isLoggedIn を False に更新
+    // routerによる認証確認を有効(非認証時はログイン画面に遷移)にするため。
+    notlogin (state) {
+      state.isLoggedIn = false
+    },
 }
