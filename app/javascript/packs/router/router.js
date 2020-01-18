@@ -1,6 +1,6 @@
 import Vue from 'vue/dist/vue.esm.js'
 import VueRouter from 'vue-router'
-import store from "../store/store.js";
+import store from "../store/store.js"
 import Home from '../components/home.vue'
 import SignUp from '../components/signup.vue'
 import LogIn from '../components/login.vue'
@@ -41,18 +41,41 @@ const router = new VueRouter({
   store
 });
 
+// isLoggedIn の更新を検知し、ルーティングさせるために必要
+const nextAuth = (to, from, next) => {
+
+  // ログイ時、ページ表示
+  if (store.getters.getIsLoggedIn)
+    next()
+
+  // 未ログイン時、ログインページに強制遷移
+  else
+    next({ name: 'LogIn' });
+}
+
+// 認証が必要なページは、未ログイン時Loginページにリダイレクト
 router.beforeEach((to, from, next) => {
 
-  // 認証が必要なページは、ログインしていない場合、Loginページにリダイレクト
+  // 公開ページはログイン不要
   if (to.matched.some(record => record.meta.isPublic)) {
-    console.log(store.state.isLoggedIn)
     next();
   } else {
-    if (!store.state.isLoggedIn) {
-      console.log(store.state.isLoggedIn)
-      next({ name: 'LogIn' });
+
+    // 未ログイン時、ログインページに強制遷移
+    if (!store.getters.getIsLoggedIn) {
+
+      // まだ認証していなければ isLoggedIn が更新されるのを監視
+      const unwatch = store.watch(
+        (state, getters) => getters.getIsLoggedIn,
+        () => {
+        unwatch(),
+        nextAuth(to, from, next)
+      })
+
+    // ログイン時、ページ表示
+    } else {
+      next()
     }
-    next();
   }
 });
 
