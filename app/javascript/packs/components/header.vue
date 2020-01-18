@@ -116,6 +116,10 @@ export default {
       this.loginFromLocalStorage()
       return
     }
+
+    // 上記以外の場合、ログインしていないため、明示的に isLoggedIn を False に更新
+    // routerによる認証確認を有効(非認証時はログイン画面に遷移)にするため。
+    this.notLogin()
   },
 
   methods: {
@@ -203,6 +207,12 @@ export default {
         }
       })
     },
+
+    // ログインしていない場合、明示的に非認証
+    // routerによる認証確認を有効(非認証時はログイン画面に遷移)にするため。
+    notLogin: function () {
+      this.$store.dispatch('notLogin')
+    }
   }
 }
 </script>
