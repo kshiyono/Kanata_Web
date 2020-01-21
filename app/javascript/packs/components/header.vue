@@ -48,17 +48,30 @@
             </v-btn>
           </template>
 
-          <v-list>
+          <v-list v-if="!$store.state.isLoggedIn">
             <v-list-item
-              v-for="(menuItem, index) in menuItems"
+              v-for="(menuItem, index) in menuItemsIsNotLoggedIn"
               :key="index"
               @click=""
             >
               <v-list-item-title>
-                <router-link :to="menuItem.path" class="blue-grey--text">{{ menuItem.title }}</router-link>
+                <router-link :to= "{ name: menuItem.name }" class="blue-grey--text">{{ menuItem.title }}</router-link>
               </v-list-item-title>
             </v-list-item>
           </v-list>
+
+          <v-list v-if="$store.state.isLoggedIn">
+            <v-list-item
+              v-for="(menuItem, index) in menuItemsIsLoggedIn"
+              :key="index"
+              @click=""
+            >
+              <v-list-item-title>
+                <router-link :to= "{ name: menuItem.name, params: { id: $store.state.loginUser.userId }}" class="blue-grey--text">{{ menuItem.title }}</router-link>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+
         </v-menu>
       </v-btn>
 
@@ -76,28 +89,39 @@ crypto.getHashes()
 
 export default {
   data: () => ({
-    menuItems: [
+
+    // 未ログイン時のメニュー表示内容一覧
+    menuItemsIsNotLoggedIn: [
       {
         title: 'Home',
-        path: '/',
-      },
-      {
-        title: 'User',
-        disabled: true,
-        path: '/users',
-      },
-      {
-        title: 'Group',
-        disabled: true,
-        path: '/group',
+        name: 'Home'
       },
       {
         title: 'Help',
-        disabled: true,
-        path: '/help',
+        name: 'Help'
       },
     ],
 
+    // ログイン時のメニュー表示内容一覧
+    menuItemsIsLoggedIn: [
+      {
+        title: 'Home',
+        name: 'Home'
+      },
+      {
+        title: 'Your Page',
+        name: 'UserDetalePage',
+
+      },
+      {
+        title: 'Group',
+        name: 'Group'
+      },
+      {
+        title: 'Help',
+        name: 'Help'
+      },
+    ],
   }),
 
   // リロード時のログイン判定

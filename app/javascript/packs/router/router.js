@@ -14,9 +14,19 @@ const routes = [
       component: Home,
       meta: { isPublic: true } },
 
+    { path: '/help',
+      name: 'Help',
+      // 暫定 component: Help,
+      meta: { isPublic: true } },
+
     { path: '/users',
       name: 'UsersListPage',
       component: UsersListPage,
+      meta: { isPublic: false } },
+
+      { path: '/group',
+      name: 'Group',
+      // 暫定 component: Help,
       meta: { isPublic: false } },
 
     { path: '/signup',
