@@ -23,14 +23,14 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <router-link to="/login" v-if="!$store.state.isLoggedIn">
+      <router-link to="/login" v-if="!$store.getters.getIsLoggedIn">
         <v-btn x-large depressed rounded class="ma-2" outlined color="teal">
           Login
           <v-icon>mdi-account</v-icon>
         </v-btn>
       </router-link>
 
-      <router-link to="/" v-if="$store.state.isLoggedIn">
+      <router-link to="/" v-if="$store.getters.getIsLoggedIn">
         <v-btn v-on:click="logout" x-large depressed rounded class="ma-2" outlined color="teal">
           Logout
           <v-icon>mdi-account</v-icon>
@@ -48,7 +48,7 @@
             </v-btn>
           </template>
 
-          <v-list v-if="!$store.state.isLoggedIn">
+          <v-list v-if="!$store.getters.getIsLoggedIn">
             <v-list-item
               v-for="(menuItem, index) in menuItemsIsNotLoggedIn"
               :key="index"
@@ -60,14 +60,14 @@
             </v-list-item>
           </v-list>
 
-          <v-list v-if="$store.state.isLoggedIn">
+          <v-list v-if="$store.getters.getIsLoggedIn">
             <v-list-item
               v-for="(menuItem, index) in menuItemsIsLoggedIn"
               :key="index"
               @click=""
             >
               <v-list-item-title>
-                <router-link :to= "{ name: menuItem.name, params: { id: $store.state.loginUser.userId }}" class="blue-grey--text">{{ menuItem.title }}</router-link>
+                <router-link :to= "{ name: menuItem.name, params: { id: $store.getters.getLoginUser.userId }}" class="blue-grey--text">{{ menuItem.title }}</router-link>
               </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -154,8 +154,8 @@ export default {
     logout: function () {
       axios
       .delete('/api/v1/logout', { data: { user: {
-          id_digest: this.$store.state.loginUser.id_digest,
-          remember_digest: this.$store.state.loginUser.remember_digest
+          id_digest: this.$store.getters.getLoginUser.id_digest,
+          remember_digest: this.$store.getters.getLoginUser.remember_digest
         }}
       })
       .then(response => {
