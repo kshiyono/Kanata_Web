@@ -3,6 +3,7 @@ export default {
       state.loginUser = {
         id_digest: payload.id_digest,
         remember_digest: payload.remember_digest,
+        name: payload.name,
         userId: payload.id
       }
 
@@ -13,6 +14,7 @@ export default {
       state.loginUser = {
         id_digest: null,
         remember_digest: null,
+        name: null,
         userId: null
       }
 

@@ -11,6 +11,7 @@ const state = {
   loginUser: {
     id_digest: null,
     remember_digest: null,
+    name: null,
     userId: null
   },
 

@@ -26,7 +26,7 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ user.name }}</v-list-item-title>
+                  <v-list-item-title>{{ $store.getters.getLoginUser.name }}</v-list-item-title>
                   <v-list-item-subtitle>Logged In</v-list-item-subtitle>
                 </v-list-item-content>
                 <router-link to="/users/:user.id/edit">
@@ -50,14 +50,14 @@ import axios from 'axios';
 export default {
   data: function () {
     return {
-      user: {},
+      // user: {},
     }
   },
-  mounted () {
-    axios
-      .get(`/api/v1/users/${this.$route.params.id}.json`)
-      .then(response => (this.user = response.data))
-  }
+  // mounted () {
+  //   axios
+  //     .get(`/api/v1/users/${this.$route.params.id}.json`)
+  //     .then(response => (this.user = response.data))
+  // }
 }
 </script>
 
