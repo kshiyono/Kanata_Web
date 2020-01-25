@@ -31,13 +31,13 @@
                 </v-list-item-content>
 
                 <v-row justify="center">
-                  <v-dialog v-model="showContent" width="600px">
+                  <v-dialog v-model="showContent" width="600">
                     <template v-slot:activator="{ on }">
                       <v-btn depressed rounded class="ma-2" outlined color="teal" v-on:click="openModal">
                         プロフィールを編集
                       </v-btn>
                     </template>
-                    <v-toolbar dark color="secondary">
+                    <v-toolbar dark color="teal darken-2">
                       <v-btn icon dark v-on:click="closeModal">
                         <v-icon>mdi-close</v-icon>
                       </v-btn>
@@ -47,11 +47,11 @@
                         保存
                       </v-btn>
                     </v-toolbar>
-                    <v-card>
+                    <v-card color="#E8F5E9">
                       <v-layout wrap justify-center>
                         <v-col cols="8" sm="8" md="8">
                           <v-text-field
-                            v-model="name"
+                            v-model="user.name"
                             label="Update your Name"
                             color="teal"
                           ></v-text-field>
@@ -59,7 +59,7 @@
 
                         <v-col cols="8" sm="8" md="8">
                           <v-text-field
-                            v-model="email"
+                            v-model="user.email"
                             label="Email"
                             color="teal"
                             type="email"
@@ -68,7 +68,6 @@
 
                         <v-col cols="8" sm="8" md="8">
                           <v-text-field
-                            v-model="password"
                             label="Password"
                             color="teal"
                             type="password"
@@ -77,7 +76,6 @@
 
                         <v-col cols="8" sm="8" md="8">
                           <v-text-field
-                            v-model="password_confirmation"
                             label="Confirmation"
                             color="teal"
                             type="password"
@@ -104,7 +102,8 @@ import axios from 'axios';
 
 export default {
   data: () => ({
-      showContent: false
+      showContent: false,
+      user: {},
   }),
   methods:{
     openModal: function(){
@@ -112,7 +111,28 @@ export default {
     },
     closeModal: function(){
       this.showContent = false
-    }
+    },
+  },
+
+  // マウント時ログインユーザを取得
+  mounted () {
+    axios
+    .get(`/api/v1/users/${this.$route.params.id}.json`)
+    .then(response => (this.user = response.data))
+    .catch(error => {
+      console.error(error);
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.statusText);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    });
   }
 }
 </script>
