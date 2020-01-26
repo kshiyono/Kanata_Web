@@ -31,9 +31,13 @@
                 </v-list-item-content>
 
                 <v-row justify="center">
-                  <v-dialog v-model="showContent" width="600">
+                  <v-dialog v-model="isUpdatePageShowlable" width="600">
                     <template v-slot:activator="{ on }">
-                      <v-btn depressed rounded class="ma-2" outlined color="teal" v-on:click="openModal">
+                      <v-btn depressed rounded
+                        class="ma-2"
+                        outlined color="teal"
+                        v-on:click="openModal"
+                        v-show="isLoginUser">
                         プロフィールを編集
                       </v-btn>
                     </template>
@@ -102,15 +106,16 @@ import axios from 'axios';
 
 export default {
   data: () => ({
-      showContent: false,
+      isUpdatePageShowlable: false,
+      isLoginUser: false,
       user: {},
   }),
   methods:{
     openModal: function(){
-      this.showContent = true
+      this.isUpdatePageShowlable = true
     },
     closeModal: function(){
-      this.showContent = false
+      this.isUpdatePageShowlable = false
     },
   },
 
@@ -118,7 +123,10 @@ export default {
   mounted () {
     axios
     .get(`/api/v1/users/${this.$route.params.id}.json`)
-    .then(response => (this.user = response.data))
+    .then( response => {
+      this.user = response.data
+      this.isLoginUser = this.user.id == this.$store.getters.getLoginUser.userId
+    })
     .catch(error => {
       console.error(error);
       if (error.response) {
