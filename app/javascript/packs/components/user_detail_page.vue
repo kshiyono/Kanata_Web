@@ -51,7 +51,7 @@
                         保存
                       </v-btn>
                     </v-toolbar>
-                    <v-card color="#E8F5E9">
+                    <v-card color="white">
                       <v-layout wrap justify-center>
                         <v-col cols="8" sm="8" md="8">
                           <v-text-field
