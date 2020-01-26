@@ -15,6 +15,7 @@ gem 'bcrypt'
 gem 'jquery-rails'
 gem 'materialize-sass'
 gem 'material_icons'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
