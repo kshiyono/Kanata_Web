@@ -47,7 +47,7 @@
                       </v-btn>
                       <v-toolbar-title>プロフィールを編集</v-toolbar-title>
                       <v-spacer></v-spacer>
-                      <v-btn depressed rounded class="ma-2" outlined color="white" v-on:click="closeModal">
+                      <v-btn depressed rounded class="ma-2" outlined color="white" v-on:click="updateUserMst">
                         保存
                       </v-btn>
                     </v-toolbar>
@@ -56,7 +56,7 @@
                         <v-col cols="8" sm="8" md="8">
                           <v-text-field
                             v-model="user.name"
-                            label="Update your Name"
+                            label="お名前"
                             color="teal"
                           ></v-text-field>
                         </v-col>
@@ -64,26 +64,34 @@
                         <v-col cols="8" sm="8" md="8">
                           <v-text-field
                             v-model="user.email"
-                            label="Email"
+                            label="メールアドレス"
                             color="teal"
                             type="email"
                           ></v-text-field>
                         </v-col>
 
                         <v-col cols="8" sm="8" md="8">
-                          <v-text-field
-                            label="Password"
+                          <v-file-input
+                            v-model="pictureIcon"
+                            :rules="pictureRules"
+                            accept="image/png, image/jpeg, image/bmp"
+                            placeholder="アイコン画像を選択"
+                            prepend-icon="mdi-camera"
                             color="teal"
-                            type="password"
-                          ></v-text-field>
+                            label="ユーザ画像"
+                          ></v-file-input>
                         </v-col>
 
                         <v-col cols="8" sm="8" md="8">
-                          <v-text-field
-                            label="Confirmation"
+                          <v-file-input
+                            v-model="pictureBackground"
+                            :rules="pictureRules"
+                            accept="image/png, image/jpeg, image/bmp"
+                            placeholder="背景画像を選択"
+                            prepend-icon="mdi-camera"
                             color="teal"
-                            type="password"
-                          ></v-text-field>
+                            label="プロフィール画像"
+                          ></v-file-input>
                         </v-col>
 
                       </v-layout>
@@ -103,12 +111,22 @@
 
 <script>
 import axios from 'axios';
+import { csrfToken } from 'rails-ujs';
+
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken()
+const crypto = require('crypto')
+crypto.getHashes()
 
 export default {
   data: () => ({
       isUpdatePageShowlable: false,
       isLoginUser: false,
       user: {},
+      pictureIcon: [],
+      pictureBackground: [],
+      pictureRules: [
+        value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+      ],
   }),
   methods:{
     openModal: function(){
@@ -116,6 +134,46 @@ export default {
     },
     closeModal: function(){
       this.isUpdatePageShowlable = false
+    },
+    updateUserMst: function(){
+      // console.log(this.pictureIcon)
+      // console.log(this.pictureBackground)
+      // console.log([this.pictureIcon, this.pictureBackground])
+      // axios
+      // .put(`/api/v1/users/${this.$route.params.id}.json`,
+      //    { user: { id_digest: this.$store.getters.getLoginUser.id_digest,
+      //      name: this.user.name, email: this.user.email,
+      //      pictures: [this.pictureIcon, this.pictureBackground] }})
+      // .then(response => {
+
+      //     let loginUser = response.data;
+
+      //     // ユーザがログイン情報を保持する場合、VuexのActionでログインユーザ情報をlocalStorageに格納
+      //     if (this.saveLogin)
+      //       this.$store.dispatch('saveLoginToLocalStorage', loginUser)
+
+      //     // sessionStorageとStoreにログインユーザ情報を格納
+      //     this.$store.dispatch('saveLoginToSessionStorage', loginUser)
+      //     this.$store.dispatch('saveLoginToStore', loginUser)
+
+      //     this.$router.push({ name: 'UserDetalePage', params: { id: loginUser.id } });
+
+      //     this.isUpdatePageShowlable = false
+      // })
+      // .catch(error => {
+      //   console.error(error);
+      //   if (error.response) {
+      //     console.log(error.response.data);
+      //     console.log(error.response.status);
+      //     console.log(error.response.statusText);
+      //     console.log(error.response.headers);
+      //   } else if (error.request) {
+      //     console.log(error.request);
+      //   } else {
+      //     console.log('Error', error.message);
+      //   }
+      //   console.log(error.config);
+      // });
     },
   },
 
